@@ -1,0 +1,61 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+#center {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+    background-color: #F8F9FA;
+  }
+
+#footer p{
+    margin: 8px;
+}
+
+.buttonHome {
+    width: 200px;
+    height: auto;
+    margin: 10px;
+}
+
+.card {
+    background: #DDE1E4;
+    margin: 20px;
+}
+
+.list-group-item{
+    background: #EBEDEF;
+}
+
+.buttons {
+    /* margin: 40px; */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.col-12.about{
+    width: 650px;
+}
+
+h6 {
+    font-size: 0.75rem;
+    font-weight: 300;
+}
+
+.fixed-bottom#viewFoot {
+    position: relative;
+}
