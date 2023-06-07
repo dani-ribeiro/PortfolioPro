@@ -41,8 +41,8 @@
 
 
 
-  <!-- Cards-->
-  <ul>
+  <!-- Cards -->
+    <ul>
       {% for ticker in stocks %}
         <div class="card" id="center" style="width: 50rem;" >
             <div class="card-body">
@@ -64,17 +64,24 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
-                        <li class="list-group-item">Previous Close Price: {{stocks[ticker].previous_close_price}} </li>
-                        <li class="list-group-item">52 Week High: {{ stocks[ticker]['52_week_high'] }}</li>
+                  <div class="col-6">
+                      <li class="list-group-item">Previous Close Price: {{stocks[ticker].previous_close_price}} </li>
+                      <li class="list-group-item">52 Week High: {{ stocks[ticker]['52_week_high'] }}</li>
 
-                        <li class="list-group-item">52 Week Low: {{ stocks[ticker]['52_week_low'] }}</li>
+                      <li class="list-group-item">52 Week Low: {{ stocks[ticker]['52_week_low'] }}</li>
+                  </div>
+                  <div class="col-6">
+                      <li class="list-group-item">Volume: {{stocks[ticker].volume}}</li>
+                      <li class="list-group-item">Market Cap: {{stocks[ticker].market_cap}}</li>
+                      <li class="list-group-item">Exchange: {{stocks[ticker].exchange_short}}</li>
+                  </div>
+                </div>
+                <div class ="row">
+                  <div class = "col-12">
+                    <div class = "row d-flex justify-content-center">
+                      <button type="button" class="btn btn-primary" id="removeEntry">Remove Shares</button>
                     </div>
-                    <div class="col-6">
-                        <li class="list-group-item">Volume: {{stocks[ticker].volume}}</li>
-                        <li class="list-group-item">Market Cap: {{stocks[ticker].market_cap}}</li>
-                        <li class="list-group-item">Exchange: {{stocks[ticker].exchange_short}}</li>
-                    </div>
+                  </div>
                 </div>
             </ul>
           </div>

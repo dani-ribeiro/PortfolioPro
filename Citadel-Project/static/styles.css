@@ -70,3 +70,10 @@ h6 {
     height: 50px;
     margin-top: 20px;
 }
+
+.chatBase {
+    background-color: #333333;
+    width: 800px;
+    height: 400px;
+    border-radius: 20px;
+}

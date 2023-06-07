@@ -3,6 +3,12 @@ from flask import Flask
 from flask import render_template, request, redirect, url_for
 import requests
 from pymongo import MongoClient
+import os
+import openai
+openai.api_key = "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"
+# question = ""
+# response = openai.Completion.create(model="text-davinci-003", prompt=question, temperature=0, max_tokens=25)
+# print(response["choices"][0]["text"])
 
 app = Flask(__name__)
 
@@ -35,32 +41,25 @@ def input_stocks():
     else:
         # TODO: change the way in which we obtain the data from the user (simplify request form)
         user = {
-            'tickers': [
-                request.form['ticker1'],
-                request.form['ticker2'],
-                request.form['ticker3'],
-                request.form['ticker4'],
-                request.form['ticker5']
-            ], # THIS WILL BE A LIST
-            'shares': [
-                request.form['share1'], 
-                request.form['share2'], 
-                request.form['share3'], 
-                request.form['share4'], 
-                request.form['share5']
-                ] # THIS WILL BE A LIST OF INTEGERS EQUAL TO THE NUMBER OF ASSETS
+            'tickers': request.form.getlist('ticker'), # THIS WILL BE A LIST
+            'shares': request.form.getlist('share') # THIS WILL BE A LIST OF INTEGERS EQUAL TO THE NUMBER OF ASSETS
         }
         print("first test - " + str(user))
-        stocks = model.cardCreation(user['tickers'], user['shares'])
-        return render_template('/view.html', stocks = stocks)
+        stocks, total = model.cardCreation(user['tickers'], user['shares'])
+        return render_template('/view.html', stocks = stocks, total = total)
 
 # RESULTS PAGE OF CARDS
 @app.route('/results', methods = ['GET'])
 def results():
     # method to obtain tickers from portfolio
-    stocks = model.cardCreation(user['tickers'], user['shares'])
+    stocks, total = model.cardCreation(user['tickers'], user['shares'])
     print(stocks)
-    return render_template('view.html', stocks = stocks)
+    return render_template('view.html', stocks = stocks, total = total)
+
+# CHATBOT PAGE
+@app.route("/chatbot", methods = ['GET'])
+def stockbot():
+    return render_template("chatbot.html")
     
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 5000)

@@ -11,146 +11,89 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
   </head>
   <body>
-   <!-- NavBar -->
-   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">PortfolioPro</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-primary" type="submit">Search</button>
-        </form>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">PortfolioPro</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Form -->
-  <div class="container">
-    <form method="POST" action="/asset-inputs">
-    <div class="row" style="margin-top: 50px;">
-        <div class="col-6">
-            <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker1" name="ticker1" placeholder="Ticker" aria-label="Ticker Symbol">
+    <!-- Form -->
+    <div class="container">
+      <form id = 'tickerForm' method="POST" action="/asset-inputs">
+        <div id="formEntries">
+          <div class="row" style="margin-top: 50px;">
+              <div class="col-6">
+                  <label for="inputTicker" class="form-label fw-bold">Ticker Symbol 1</label>
+                  <input type="text" class="form-control" id="ticker1" name="ticker" placeholder="Ticker" aria-label="Ticker Symbol">
+              </div>
+              <div class="col-6">
+                  <label for="inputShares" class="form-label fw-bold">Number of Shares for Ticker 1</label>
+                  <input type="number" class="form-control" id="share1" name="share" placeholder="Share Count" aria-label="Number of shares">
+              </div>
+          </div>
         </div>
-        <div class="col-6">
-            <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share1" name="share1" placeholder="Share Count" aria-label="Number of shares">
-        </div>
-    </div>
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-6">
-            <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker2" name="ticker2" placeholder="Ticker" aria-label="Ticker Symbol">
-        </div>
-        <div class="col-6">
-            <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share2" name="share2" placeholder="Share Count" aria-label="Number of shares">
-        </div>
-    </div>
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-6">
-            <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker3" name="ticker3" placeholder="Ticker" aria-label="Ticker Symbol">
-        </div>
-        <div class="col-6">
-            <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share3" name="share3" placeholder="Share Count" aria-label="Number of shares">
-        </div>
-    </div>
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-6">
-            <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker4" name="ticker4" placeholder="Ticker" aria-label="Ticker Symbol">
-        </div>
-        <div class="col-6">
-            <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share4" name="share4" placeholder="Share Count" aria-label="Number of shares">
-        </div>
-    </div>
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-6">
-            <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker5" name="ticker5" placeholder="Ticker" aria-label="Ticker Symbol">
-        </div>
-        <div class="col-6">
-            <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share5" name="share5" placeholder="Share Count" aria-label="Number of shares">
-        </div>
-    </div>
-      <!-- Submit Button -->
-      <!-- <div class="container">
-        <div class="row buttons" id="center">
-            <button type="submit" class="btn btn-primary center"
-            style="--bs-btn-font-size: 1rem; width: 150px; height: 50px;">
-            <a href="/results" style="color: white; text-decoration-line: none;">Submit</a>
-            </button>
-             -->
-            <!-- Back Button -->
-            <!-- <button class="btn btn-primary center"
-            style="--bs-btn-font-size: 1rem; width: 150px; height: 50px;">
-            <a href="/" style="color: white; text-decoration-line: none;">Back</a>
-            </button> -->
-            <!-- <input type="submit" /> -->
-        <!-- </div>
-      </div> -->
-      <div class="row d-flex justify-content-center">
-        <input id="submitButton" type="submit" class="btn btn-primary center"/>
-      </div>
-    </form>
-  </div>
 
+        <!-- Add entry button -->
+        <div class = "row d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" id="addEntry">Add Entry</button>
+        </div>
 
-  <!-- Submit Button -->
-  <!-- <div class="container">
-    <div class="row buttons" id="center">
-            <button type="submit" class="btn btn-primary center"
-            style="--bs-btn-font-size: 1rem; width: 150px; height: 50px;">
-            <a href="/results" style="color: white; text-decoration-line: none;">Submit</a>
-            </button> -->
-          <!-- Back Button -->
-            <!-- <button class="btn btn-primary center"
-            style="--bs-btn-font-size: 1rem; width: 150px; height: 50px;">
-            <a href="/" style="color: white; text-decoration-line: none;">Back</a>
-            </button>
+        <!-- Submit button -->
+        <div class="row d-flex justify-content-center">
+          <input id="submitButton" type="submit" class="btn btn-primary center"/>
+        </div>
+      </form>
     </div>
-  </div> -->
   
-  <!-- Footer -->
-  <div class="row fixed-bottom" style="margin-top: 50px;">
-    <footer id="footer">
-        <p>Copyright © PortfolioPro 2023. All rights reserved.</p>
-    </footer>
-</div>
+    <!-- Footer -->
+    <div class="row fixed-bottom" style="margin-top: 50px;">
+      <footer id="footer">
+          <p>Copyright © PortfolioPro 2023. All rights reserved.</p>
+      </footer>
+    </div>
 
-
+    <!-- JS for BootStrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JS for new entries -->
     <script>
-      $(document.ready(function() {
+      $(document).ready(function() {
         var entryCount = 1; // Counter for form entries
 
-        // "Add Entry" button event handling
+        // Handle click event for "Add Entry" button
         $('#addEntry').click(function() {
-          entryCount++
-          var newEntry = '<div class="row" style="margin-top: 50px;">' + 
-        '<div class="col-6">' + 
-            <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker1" name="ticker1" placeholder="Ticker" aria-label="Ticker Symbol">
-        </div>
-        <div class="col-6">
-            <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share1" name="share1" placeholder="Share Count" aria-label="Number of shares">
-        </div>
-    </div>'
-        }
-      }
+          entryCount++; // Increment the counter
+          console.log('clicked')
+
+          var newEntry = '<div class="row" style = "margin-top: 50px;">' +
+            '<div class = "col-6">' +
+              '<label for = "inputTicker" class = "form-label fw-bold"> Ticker Symbol ' + entryCount + '</label>' +
+              '<input type= "text" class = "form-control" id = "ticker' + entryCount + '" name = "ticker" placeholder = "Ticker" aria-label = "Ticker Symbol">' +
+            '</div>' +
+            '<div class = "col-6">' +
+              '<label for = "inputShares" class = "form-label fw-bold">Number of Shares for Ticker ' + entryCount + '</label>' +
+              '<input type = "number" class = "form-control" id = "share' + entryCount + '" name = "share" placeholder = "Share Count" aria-label = "Number of Shares">' +
+            '</div></div>'
+
+          $('#formEntries').append(newEntry); // Append the new entry to the form
+        });
+      });
+    </script>
   </body>
 </html>
