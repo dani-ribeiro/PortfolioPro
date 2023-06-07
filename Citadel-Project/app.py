@@ -5,10 +5,6 @@ import requests
 from pymongo import MongoClient
 
 app = Flask(__name__)
-user = {
-    'tickers': [],
-    'shares': []
-}
 
 # MONGO DB CONFIGURATION TODO: USERNAME/PASSWORD GENERATION
 username = "admin"
@@ -18,6 +14,10 @@ client = MongoClient(url)
 
 db = client["portfolio"]
 collection = db.stocks
+user = {
+    'tickers': [],
+    'shares': []
+}
 
 # HOME PAGE
 @app.route("/", methods = ['GET'])
@@ -51,16 +51,16 @@ def input_stocks():
                 ] # THIS WILL BE A LIST OF INTEGERS EQUAL TO THE NUMBER OF ASSETS
         }
         print("first test - " + str(user))
-        return redirect('/results')
+        stocks = model.cardCreation(user['tickers'], user['shares'])
+        return render_template('/view.html', stocks = stocks)
 
 # RESULTS PAGE OF CARDS
 @app.route('/results', methods = ['GET'])
 def results():
-    global user
-    print("second test -" + str(user))
-#     # method to obtain tickers from portfolio
+    # method to obtain tickers from portfolio
     stocks = model.cardCreation(user['tickers'], user['shares'])
-    return render_template('view.html', stocks = stocks) # TODO: add stocks
+    print(stocks)
+    return render_template('view.html', stocks = stocks)
     
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 5000)
