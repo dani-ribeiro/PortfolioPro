@@ -21,7 +21,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/templates/index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
@@ -34,73 +34,90 @@
 
   <!-- Form -->
   <div class="container">
+    <form method="POST" action="/asset-inputs">
     <div class="row" style="margin-top: 50px;">
         <div class="col-6">
             <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker1" placeholder="Ticker" aria-label="Ticker Symbol">
+            <input type="text" class="form-control" id="ticker1" name="ticker1" placeholder="Ticker" aria-label="Ticker Symbol">
         </div>
         <div class="col-6">
             <label for="inputShares" class="form-labe fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share1" placeholder="Share Count" aria-label="Number of shares">
+            <input type="text" class="form-control" id="share1" name="share1" placeholder="Share Count" aria-label="Number of shares">
         </div>
     </div>
     <div class="row" style="margin-top: 20px;">
         <div class="col-6">
             <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker2" placeholder="Ticker" aria-label="Ticker Symbol">
+            <input type="text" class="form-control" id="ticker2" name="ticker2" placeholder="Ticker" aria-label="Ticker Symbol">
         </div>
         <div class="col-6">
             <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share2" placeholder="Share Count" aria-label="Number of shares">
+            <input type="text" class="form-control" id="share2" name="share2" placeholder="Share Count" aria-label="Number of shares">
         </div>
     </div>
     <div class="row" style="margin-top: 20px;">
         <div class="col-6">
             <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker3" placeholder="Ticker" aria-label="Ticker Symbol">
+            <input type="text" class="form-control" id="ticker3" name="ticker3" placeholder="Ticker" aria-label="Ticker Symbol">
         </div>
         <div class="col-6">
             <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share3" placeholder="Share Count" aria-label="Number of shares">
+            <input type="text" class="form-control" id="share3" name="share3" placeholder="Share Count" aria-label="Number of shares">
         </div>
     </div>
     <div class="row" style="margin-top: 20px;">
         <div class="col-6">
             <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker4" placeholder="Ticker" aria-label="Ticker Symbol">
+            <input type="text" class="form-control" id="ticker4" name="ticker4" name="ticker4" placeholder="Ticker" aria-label="Ticker Symbol">
         </div>
         <div class="col-6">
             <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share4" placeholder="Share Count" aria-label="Number of shares">
+            <input type="text" class="form-control" id="share4" name="share4" placeholder="Share Count" aria-label="Number of shares">
         </div>
     </div>
     <div class="row" style="margin-top: 20px;">
         <div class="col-6">
             <label for="inputTicker" class="form-label fw-bold">Ticker Symbol</label>
-            <input type="text" class="form-control" id="ticker5" placeholder="Ticker" aria-label="Ticker Symbol">
+            <input type="text" class="form-control" id="ticker5" name="ticker5" placeholder="Ticker" aria-label="Ticker Symbol">
         </div>
         <div class="col-6">
             <label for="inputShares" class="form-label fw-bold">Number of Shares</label>
-            <input type="text" class="form-control" id="share5" placeholder="Share Count" aria-label="Number of shares">
+            <input type="text" class="form-control" id="share5" name="share5" placeholder="Share Count" aria-label="Number of shares">
         </div>
     </div>
+      <!-- Submit Button -->
+      <div class="container">
+        <div class="row buttons" id="center">
+            <button type="submit" class="btn btn-primary center"
+            style="--bs-btn-font-size: 1rem; width: 150px; height: 50px;">
+            <a href="/results" style="color: white; text-decoration-line: none;">Submit</a>
+            </button>
+            <!-- Back Button -->
+            <button class="btn btn-primary center"
+            style="--bs-btn-font-size: 1rem; width: 150px; height: 50px;">
+            <a href="/" style="color: white; text-decoration-line: none;">Back</a>
+            </button>
+            <!-- <input type="submit" /> -->
+        </div>
+      </div>
+    </form>
   </div>
 
 
   <!-- Submit Button -->
-  <div class="container">
+  <!-- <div class="container">
     <div class="row buttons" id="center">
             <button type="submit" class="btn btn-primary center"
             style="--bs-btn-font-size: 1rem; width: 150px; height: 50px;">
-            <a href="/templates/index.html" style="color: white; text-decoration-line: none;">Submit</a>
-            </button>
+            <a href="/results" style="color: white; text-decoration-line: none;">Submit</a>
+            </button> -->
           <!-- Back Button -->
-            <button class="btn btn-primary center"
+            <!-- <button class="btn btn-primary center"
             style="--bs-btn-font-size: 1rem; width: 150px; height: 50px;">
-            <a href="/templates/index.html" style="color: white; text-decoration-line: none;">Back</a>
+            <a href="/" style="color: white; text-decoration-line: none;">Back</a>
             </button>
     </div>
-  </div>
+  </div> -->
   
   <!-- Footer -->
   <div class="row fixed-bottom" style="margin-top: 50px;">

@@ -21,7 +21,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/templates/index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
@@ -33,40 +33,44 @@
   </nav>
 
   <!-- Cards-->
+  <ul>
+      {% for ticker in stocks %}
         <div class="card" id="center" style="width: 50rem;" >
             <div class="card-body">
-              <h5 class="card-title">{{Company Name}}</h5>
-              <p class="card-text">{{Ticker}}</p>
+              <h5 class="card-title">{{ ticker.nane }}</h5>
+              <p class="card-text">{{ ticker.ticker }}</p>
             </div>
             <ul class="list-group list-group-flush">
                 <div class="row">
                     <div class="col-6">
-                        <li class="list-group-item">Current Price: {{price}}</li>
-                        <li class="list-group-item">Shares: {{shares}}</li>
+                        <li class="list-group-item">Current Price: {{ticker.price}}</li>
+                        <li class="list-group-item">Shares: {{ticker.shares}}</li>
                         <!-- Initial Price is "current price" when user invests in a stock. After that, it will never change. -->
-                        <li class="list-group-item">Initial Price: {{initialPrice}}</li>    
+                        <li class="list-group-item">Trade Price: {{ticker.day_open}}</li>    
                     </div>
                     <div class="col-6">
-                        <li class="list-group-item">Day High: {{dayHigh}}</li>
-                        <li class="list-group-item">Day Low: {{dayLow}}</li>
-                        <li class="list-group-item">Day Open: {{dayOpen}}</li>
+                        <li class="list-group-item">Day High: {{ticker.day_high}}</li>
+                        <li class="list-group-item">Day Low: {{ticker.day_low}}</li>
+                        <li class="list-group-item">Day Open: {{ticker.day_open}}</li>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <li class="list-group-item">Previous Close Price: {{prevClosePrice}} </li>
-                        <li class="list-group-item">52 Week High: {{52High}}</li>
-                        <li class="list-group-item">52 Week Low: {{52Low}}</li>
+                        <li class="list-group-item">Previous Close Price: {{ticker.previous_close_price}} </li>
+                        <li class="list-group-item">52 Week High: {{ getattr(ticker, '52_week_high') }}</li>
+
+                        <li class="list-group-item">52 Week Low: {{getattr(ticker, '52_week_low')}}</li>
                     </div>
                     <div class="col-6">
-                        <li class="list-group-item">Volume: {{volume}}</li>
-                        <li class="list-group-item">Market Cap: {{marketCap}}</li>
-                        <li class="list-group-item">Exchange: {{exchange}}</li>
+                        <li class="list-group-item">Volume: {{ticker.volume}}</li>
+                        <li class="list-group-item">Market Cap: {{ticker.market_cap}}</li>
+                        <li class="list-group-item">Exchange: {{ticker.exchange_short}}</li>
                     </div>
                 </div>
             </ul>
           </div>
-      </div>
+      {% endfor %}
+      </ul>
 
 <!-- Back Button -->
       <div class="container">
@@ -74,7 +78,7 @@
             <div class="col-12" id="center">
                 <button class="btn btn-primary center"
                 style="--bs-btn-font-size: 1rem; width: 150px; height: 50px;">
-                <a href="/templates/index.html" style="color: white; text-decoration-line: none;">Back</a>
+                <a href="/" style="color: white; text-decoration-line: none;">Back</a>
                 </button>
             </div>
         </div>
