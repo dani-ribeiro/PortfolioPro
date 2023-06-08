@@ -5,7 +5,7 @@ import requests
 from pymongo import MongoClient
 import os
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 
 app = Flask(__name__)
 

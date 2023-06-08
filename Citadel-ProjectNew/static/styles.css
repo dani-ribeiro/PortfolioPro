@@ -89,8 +89,10 @@ h6 {
 .stockText {
     color:white; 
     text-align: left;
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .stockCol {

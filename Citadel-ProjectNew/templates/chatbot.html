@@ -46,10 +46,12 @@
         <div class="row d-flex align-items-center">
             <div class="col-12 chatBase mt-100px" id="center">
                 <!-- StockBot Answer -->
-                <div class="row">
-                  <div class="col-12 stockCol" style="height: 325px;">
-                    <p class="stockText">
-                      <img src="/static/images/stockBot.png" style="width: 50px; height:auto;">
+                <div class="row stockText">
+                  <div class="col-1">
+                    <img src="/static/images/stockBot.png" style="width: 50px; height:auto;">
+                  </div>
+                  <div class="col-11 stockCol" style="height: 325px;">
+                    <p>
                       StockBot: {% if stockBot_response %}{{stockBot_response}}{% endif %}
                     </p>
                   </div>
