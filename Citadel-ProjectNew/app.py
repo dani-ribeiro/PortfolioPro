@@ -5,7 +5,7 @@ import requests
 from pymongo import MongoClient
 import os
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 
 app = Flask(__name__)
 
@@ -46,7 +46,7 @@ def input_stocks():
         print("first test - " + str(user))
         stocks, total = model.cardCreation(user['tickers'], user['shares'])
         print(str(stocks))
-        return render_template('/view.html', stocks = stocks, total = total)
+        return render_template('/view.html', stocks = stocks, total = round(total, 2))
 
 # RESULTS PAGE OF CARDS TODO: ADD POST METHOD FOR ADDING
 @app.route('/results', methods = ['GET', 'POST'])
@@ -76,7 +76,7 @@ def results():
 def stockbot():
     if request.method == 'POST':
         question = request.form['question']
-        response = openai.Completion.create(model="text-davinci-003", prompt=question, temperature=0, max_tokens=250)
+        response = openai.Completion.create(model="text-davinci-003", prompt=question, temperature=0, max_tokens=200)
         stockBot_response = response.choices[0]["text"]
         return render_template("chatbot.html", stockBot_response=stockBot_response)
     return render_template("chatbot.html")
