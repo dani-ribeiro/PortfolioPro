@@ -38,13 +38,14 @@ def input_stocks():
         # TODO: change the way in which we obtain the data from the user (simplify request form)
         user['tickers'].extend(request.form.getlist('ticker'))
         user['shares'].extend(request.form.getlist('share'))
-        user['shares'] = [eval(i) for i in user['shares']]
+        user['shares'] = [int(i) for i in user['shares']]
         # user = {
         #     'tickers': request.form.getlist('ticker'), # THIS WILL BE A LIST
         #     'shares': request.form.getlist('share') # THIS WILL BE A LIST OF INTEGERS EQUAL TO THE NUMBER OF ASSETS
         # }
         print("first test - " + str(user))
         stocks, total = model.cardCreation(user['tickers'], user['shares'])
+        print(str(stocks))
         return render_template('/view.html', stocks = stocks, total = total)
 
 # RESULTS PAGE OF CARDS TODO: ADD POST METHOD FOR ADDING
@@ -53,7 +54,7 @@ def results():
     # method to obtain tickers from portfolio
     if request.method == 'GET':
         stocks, total = model.cardCreation(user['tickers'], user['shares'])
-        print(stocks)
+        print(str(stocks))
         return render_template('view.html', stocks = stocks, total = total)
     else:
         ticker = request.form.get("tickerName")
@@ -62,10 +63,12 @@ def results():
         if removeShareNum != None:
             user['tickers'], user['shares'] = model.remove_shares(user['tickers'], user['shares'], ticker, int(removeShareNum))
             stocks, total = model.cardCreation(user['tickers'], user['shares'])
+            print(str(stocks))
             return render_template('view.html', stocks = stocks, total = total)
         else:
             user['tickers'], user['shares'] = model.add_shares(user['tickers'], user['shares'], ticker, int(addShareNum))
             stocks, total = model.cardCreation(user['tickers'], user['shares'])
+            print(str(stocks))
             return render_template('view.html', stocks=stocks, total=total)
 
 # CHATBOT PAGE

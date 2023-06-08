@@ -76,12 +76,12 @@
                   <div class="col-6">
                       <li class="list-group-item">Volume: {{stocks[ticker].volume}}</li>
                       <li class="list-group-item">Market Cap: {{stocks[ticker].market_cap}}</li>
-                      <li class="list-group-item">Exchange: {{stocks[ticker].exchange_short}}</li>
+                      <li class="list-group-item">Percentage of Portfolio: {{stocks[ticker]["percent"][1]}}%</li>
                   </div>
                 </div>
 
                 <!-- Add/Remove Shares Button -->
-                <div class ="row" style="margin-top: 50px;">
+                <div class ="row" style="margin-bottom: 15px;">
                   <!-- Add Shares -->
                   <div class = "col-6">
                     <div class="row d-flex justify-content-center">
