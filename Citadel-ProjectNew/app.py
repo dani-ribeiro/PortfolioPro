@@ -5,10 +5,7 @@ import requests
 from pymongo import MongoClient
 import os
 import openai
-openai.api_key = "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"
-# question = ""
-# response = openai.Completion.create(model="text-davinci-003", prompt=question, temperature=0, max_tokens=25)
-# print(response["choices"][0]["text"])
+openai.api_key = "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"
 
 app = Flask(__name__)
 
@@ -40,25 +37,42 @@ def input_stocks():
         return render_template('addPortfolio.html')
     else:
         # TODO: change the way in which we obtain the data from the user (simplify request form)
-        user = {
-            'tickers': request.form.getlist('ticker'), # THIS WILL BE A LIST
-            'shares': request.form.getlist('share') # THIS WILL BE A LIST OF INTEGERS EQUAL TO THE NUMBER OF ASSETS
-        }
+        user['tickers'].extend(request.form.getlist('ticker'))
+        user['shares'].extend(request.form.getlist('share'))
+        # user = {
+        #     'tickers': request.form.getlist('ticker'), # THIS WILL BE A LIST
+        #     'shares': request.form.getlist('share') # THIS WILL BE A LIST OF INTEGERS EQUAL TO THE NUMBER OF ASSETS
+        # }
         print("first test - " + str(user))
         stocks, total = model.cardCreation(user['tickers'], user['shares'])
         return render_template('/view.html', stocks = stocks, total = total)
 
-# RESULTS PAGE OF CARDS
-@app.route('/results', methods = ['GET'])
+# RESULTS PAGE OF CARDS TODO: ADD POST METHOD FOR REMOVAL/ADDING
+@app.route('/results', methods = ['GET', 'POST'])
 def results():
     # method to obtain tickers from portfolio
-    stocks, total = model.cardCreation(user['tickers'], user['shares'])
-    print(stocks)
-    return render_template('view.html', stocks = stocks, total = total)
+    if request.method == 'GET':
+        stocks, total = model.cardCreation(user['tickers'], user['shares'])
+        print(stocks)
+        return render_template('view.html', stocks = stocks, total = total)
+    else:
+        removeShareNum = request.form.get("removeVal")
+        ticker = request.form.get("tickerName")
+        print('pulled ticker is')
+        print(ticker)
+        print("end pulled ticker test")
+        user['tickers'], user['shares'] = model.remove_shares(user['tickers'], user['shares'], ticker, int(removeShareNum))
+        stocks, total = model.cardCreation(user['tickers'], user['shares'])
+        return render_template('view.html', stocks = stocks, total = total)
 
 # CHATBOT PAGE
-@app.route("/chatbot", methods = ['GET'])
+@app.route("/chatbot", methods=['GET', 'POST'])
 def stockbot():
+    if request.method == 'POST':
+        question = request.form['question']
+        response = openai.Completion.create(model="text-davinci-003", prompt=question, temperature=0, max_tokens=25)
+        stockBot_response = response.choices[0]["text"]
+        return render_template("chatbot.html", stockBot_response=stockBot_response)
     return render_template("chatbot.html")
     
 if __name__ == '__main__':

@@ -98,6 +98,9 @@ def add_shares(ticker_list, shares_list, ticker, add_shares):
     return ticker_list, shares_list
       
 def remove_shares(ticker_list, shares_list, ticker, remove_shares = "All"):
+    print("ticker is ")
+    print(ticker)
+    print("end of test")
     ix = ticker_list.index(ticker)
     if remove_shares == "All" or remove_shares >= shares_list[ix]:
         ticker_list.pop(ix)

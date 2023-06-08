@@ -39,21 +39,24 @@
                 <h1 id="center">StockBot</h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 chatBase align-bottom" id="center">
+        <div class="row d-flex align-items-center">
+            <div class="col-12 chatBase mt-100px" id="center">
                 <!-- StockBot Answer -->
+                <p style="color:white;">
+                  StockBot: {% if stockBot_response %}{{stockBot_response}}{% endif %}
+                </p>
 
                 <!-- StockBot Question -->
                     <!-- Form -->
                         <div class="container">
-                            <form id = 'questionForm' method="POST" action="/DOTHISDOTHISDOTHISDOTHIS">
+                            <form id = 'questionForm' method="POST" action="/chatbot">
                                 <div id="questionEntries">
-                                    <div class="row" style="margin-top: 50px;">
-                                        <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-10">
                                             <input type="text" class="form-control" id="question" name="question" placeholder="Send a message." aria-label="Send a message.">
                                         </div>
-                                        <div class="col-6">
-                                            <input id="questionSubmit" type="submit" class="btn btn-primary center"/>
+                                        <div class="col-2">
+                                            <input id="questionSubmit" type="submit" class="btn btn-primary" style="margin: 0"/>
                                         </div>
                                     </div>
                                 </div>
