@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>View Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">PortfolioPro</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Form -->
+    <div class="container">
+      <form id = 'tickerForm' method="POST" action="/asset-inputs">
+        <div id="formEntries">
+          <div class="row" style="margin-top: 50px;">
+              <div class="col-6">
+                  <label for="inputTicker" class="form-label fw-bold">Ticker Symbol 1</label>
+                  <input type="text" class="form-control" id="ticker1" name="ticker" placeholder="Ticker" aria-label="Ticker Symbol">
+              </div>
+              <div class="col-6">
+                  <label for="inputShares" class="form-label fw-bold">Number of Shares for Ticker 1</label>
+                  <input type="number" class="form-control" id="share1" name="share" placeholder="Share Count" aria-label="Number of shares">
+              </div>
+          </div>
+        </div>
+
+        <!-- Add entry button -->
+        <div class = "row d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" id="addEntry">Add Entry</button>
+        </div>
+
+        <!-- Submit button -->
+        <div class="row d-flex justify-content-center">
+          <input id="submitButton" type="submit" class="btn btn-primary center"/>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Footer -->
+    <div class="row fixed-bottom" style="margin-top: 50px;">
+      <footer id="footer">
+          <p>Copyright © PortfolioPro 2023. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <!-- JS for BootStrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JS for new entries -->
+    <script>
+      $(document).ready(function() {
+        var entryCount = 1; // Counter for form entries
+
+        // Handle click event for "Add Entry" button
+        $('#addEntry').click(function() {
+          entryCount++; // Increment the counter
+          console.log('clicked')
+
+          var newEntry = '<div class="row" style = "margin-top: 50px;">' +
+            '<div class = "col-6">' +
+              '<label for = "inputTicker" class = "form-label fw-bold"> Ticker Symbol ' + entryCount + '</label>' +
+              '<input type= "text" class = "form-control" id = "ticker' + entryCount + '" name = "ticker" placeholder = "Ticker" aria-label = "Ticker Symbol">' +
+            '</div>' +
+            '<div class = "col-6">' +
+              '<label for = "inputShares" class = "form-label fw-bold">Number of Shares for Ticker ' + entryCount + '</label>' +
+              '<input type = "number" class = "form-control" id = "share' + entryCount + '" name = "share" placeholder = "Share Count" aria-label = "Number of Shares">' +
+            '</div></div>'
+
+          $('#formEntries').append(newEntry); // Append the new entry to the form
+        });
+      });
+    </script>
+  </body>
+</html>
