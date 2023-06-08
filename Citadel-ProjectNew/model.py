@@ -57,41 +57,6 @@ def cardCreation(ticker_list, shares_list) -> dict:
         data_list[ticker]['percent'] = percent_list[i]
     return data_list, total_val
 
-# def update_data_list(data_list, ticker_list, shares_list):
-#     ticker_list, shares_list = clean_up(ticker_list, shares_list)
-#     total_val = 0
-#     for i, ticker in enumerate(ticker_list):
-#         if ticker in data_list:
-#             data_list[ticker]['shares'] += shares_list[i] #add the new shares
-#         else: 
-#             ticker_data = getStocks(ticker)['data'][0] #get the data for the stock
-#             ticker_data['shares'] = shares_list[i] #add the value of the stocks
-#             data_list[ticker] = ticker_data #add the new data
-
-#         price = data_list[ticker]['price']
-#         total_val += price*data_list[ticker]['shares'] #add price*shares to the total value
-#     for ticker in data_list:
-#         price = data_list[ticker]['price']
-#         ticker_val = price*data_list[ticker]['shares']
-#         data_list[ticker]['percent'] = round(ticker_val*100/total_val, 2) #get the percentages
-#     return data_list, total_val
-        
-# def remove_data_list(data_list, ticker_list, shares_list):
-#     ticker_list, shares_list = clean_up(ticker_list, shares_list)
-#     total_val = 0
-#     for i, ticker in enumerate(ticker_list):
-#         if ticker in data_list:
-#             data_list[ticker]['shares'] -= shares_list[i] #add the new shares
-#             if data_list[ticker]['shares'] <= 0: 
-#                 del data_list[ticker]
-#             else: total_val += data_list[ticker]['price'] * data_list[ticker]['shares']
-#         else: continue
-        
-#     for ticker in data_list:
-#         price = data_list[ticker]['price']
-#         ticker_val = price*data_list[ticker]['shares']
-#         data_list[ticker]['percent'] = round(ticker_val*100/total_val, 2) #get the percentages
-#     return data_list, total_val
 def add_shares(ticker_list, shares_list, ticker, add_shares):
     ix = ticker_list.index(ticker)
     shares_list[ix] += add_shares
@@ -109,5 +74,5 @@ def remove_shares(ticker_list, shares_list, ticker, remove_shares = "All"):
         shares_list[ix] = shares_list[ix] - remove_shares
     return ticker_list, shares_list
 
-def give_percent_list(data_list):
-    return [(ticker, ticker['percent']) for ticker in data_list]
+def sorted_percent_list(data_list):
+    return sorted([(ticker, ticker['percent']) for ticker in data_list], key = lambda x: x[1])[::-1]

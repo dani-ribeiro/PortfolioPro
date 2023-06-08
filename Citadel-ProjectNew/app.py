@@ -5,7 +5,7 @@ import requests
 from pymongo import MongoClient
 import os
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 
 app = Flask(__name__)
 
@@ -28,7 +28,6 @@ user = {
 def show_home():
     return render_template("index.html")
 
-
 # USER INPUTS PAGE (INPUT STOCK INFORMATION)
 @app.route('/asset-inputs', methods = ['GET', 'POST'])
 def input_stocks():
@@ -39,6 +38,7 @@ def input_stocks():
         # TODO: change the way in which we obtain the data from the user (simplify request form)
         user['tickers'].extend(request.form.getlist('ticker'))
         user['shares'].extend(request.form.getlist('share'))
+        user['shares'] = [eval(i) for i in user['shares']]
         # user = {
         #     'tickers': request.form.getlist('ticker'), # THIS WILL BE A LIST
         #     'shares': request.form.getlist('share') # THIS WILL BE A LIST OF INTEGERS EQUAL TO THE NUMBER OF ASSETS
@@ -47,7 +47,7 @@ def input_stocks():
         stocks, total = model.cardCreation(user['tickers'], user['shares'])
         return render_template('/view.html', stocks = stocks, total = total)
 
-# RESULTS PAGE OF CARDS TODO: ADD POST METHOD FOR REMOVAL/ADDING
+# RESULTS PAGE OF CARDS TODO: ADD POST METHOD FOR ADDING
 @app.route('/results', methods = ['GET', 'POST'])
 def results():
     # method to obtain tickers from portfolio
@@ -56,24 +56,32 @@ def results():
         print(stocks)
         return render_template('view.html', stocks = stocks, total = total)
     else:
-        removeShareNum = request.form.get("removeVal")
         ticker = request.form.get("tickerName")
-        print('pulled ticker is')
-        print(ticker)
-        print("end pulled ticker test")
-        user['tickers'], user['shares'] = model.remove_shares(user['tickers'], user['shares'], ticker, int(removeShareNum))
-        stocks, total = model.cardCreation(user['tickers'], user['shares'])
-        return render_template('view.html', stocks = stocks, total = total)
+        removeShareNum = request.form.get("removeVal")
+        addShareNum = request.form.get("addVal") # test
+        if removeShareNum != None:
+            user['tickers'], user['shares'] = model.remove_shares(user['tickers'], user['shares'], ticker, int(removeShareNum))
+            stocks, total = model.cardCreation(user['tickers'], user['shares'])
+            return render_template('view.html', stocks = stocks, total = total)
+        else:
+            user['tickers'], user['shares'] = model.add_shares(user['tickers'], user['shares'], ticker, int(addShareNum))
+            stocks, total = model.cardCreation(user['tickers'], user['shares'])
+            return render_template('view.html', stocks=stocks, total=total)
 
 # CHATBOT PAGE
 @app.route("/chatbot", methods=['GET', 'POST'])
 def stockbot():
     if request.method == 'POST':
         question = request.form['question']
-        response = openai.Completion.create(model="text-davinci-003", prompt=question, temperature=0, max_tokens=25)
+        response = openai.Completion.create(model="text-davinci-003", prompt=question, temperature=0, max_tokens=250)
         stockBot_response = response.choices[0]["text"]
         return render_template("chatbot.html", stockBot_response=stockBot_response)
     return render_template("chatbot.html")
+
+# ABOUT PAGE
+@app.route("/about", methods = ['GET'])
+def about():
+    return render_template("about.html")
     
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 5000)

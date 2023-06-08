@@ -23,6 +23,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/about">About Us</a>
+          </li>
         </ul>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -32,7 +35,7 @@
     </div>
   </nav>
 
-  <!-- PyChart -->
+  <!-- Pie Chart -->
 
 
 
@@ -41,7 +44,7 @@
 
 
 
-  <!-- Cards -->
+  <!-- Variable Card Creation -->
     <ul>
       {% for ticker in stocks %}
         <div class="card" id="center" style="width: 50rem;" >
@@ -77,55 +80,101 @@
                   </div>
                 </div>
 
-                <!-- Remove Shares -->
+                <!-- Add/Remove Shares Button -->
                 <div class ="row" style="margin-top: 50px;">
-                  <div class = "col-12">
+                  <!-- Add Shares -->
+                  <div class = "col-6">
+                    <div class="row d-flex justify-content-center">
+                      <button type="button" class="btn btn-primary" id="addEntry" style = "width: 390px;"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#addModal">Add Shares for {{ticker}}</button>
+                    </div>
+                  </div>
+                  <!-- Remove Shares -->
+                  <div class = "col-6">
                     <div class = "row d-flex justify-content-center">
-                      <button type="button" class="btn btn-primary" id="removeEntry" data-bs-toggle="modal" data-bs-target="#delModal">Remove Shares for {{stocks[ticker].ticker}}</button>
+                      <button type="button" class="btn btn-primary" id="removeEntry" style = "width: 390px;"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#delModal">Remove Shares for {{ticker}}</button>
                     </div>
                   </div>
                 </div>
 
-                <!-- Modal pop up to remove shares -->
-                <div class = "modal fade" id = "delModal" tabindex="-1" role="dialog" aria-labelledby="Remove Modal Label" aria-hidden = "true">
-                  <div class="modal-dialog modal-dialog-centered" style = "margin-left: auto; margin-right: auto;">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class ="modal-title fs-5" id = "delModalLabel">Remove Shares for {{ stocks[ticker].ticker }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <form id="removeShareForm" method="POST" action="/results">
-                        <div class = "modal-body">
-                          <!-- REMOVE # OF SHARES FOR TICKER -->
-                            <div id="removeShares">
-                              <!-- range field for number of shares to be removed -->
-                              <label for="delSharesRange"  class="form-label">Remove Shares</label>
-                              <input type="range" class="form-range" id="delSharesRange" name="removeVal" value="{{ stocks[ticker].shares // 2 }}" min="1" max="{{ stocks[ticker].shares }}"  oninput="this.nextElementSibling.value = this.value">
-                              <output>{{ stocks[ticker].shares // 2 }}</output>
-                              <label for="ticker" class="form-label">Ticker Name</label>
-                              <input type="text" class="form-control" id="ticker" name="tickerName" value="{{ stocks[ticker].ticker }}" disabled>
-                            </div>
-                        </div>
-                        <div class = "modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
-                            <!-- <a href="/results" style="color: white; text-decoration-line: none;">Cancel</a> -->
-                          </button>
-                          <!-- submit button -->
-                          <button id="submitButton" type="button submit" class="btn btn-primary">Save Changes
-                            <!-- <a href="/results" style="color: white; text-decoration-line: none;">Save Changes</a> -->
-                          </button>
-                        </div>
-                      </form>
+              <!-- Modal pop up to add shares -->
+              <div class = "modal fade" id = "addModal" tabindex="-1" role="dialog" aria-labelledby="Add Modal Label" aria-hidden = "true">
+                <div class="modal-dialog modal-dialog-centered" style = "margin-left: auto; margin-right: auto;">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class ="modal-title fs-5" id = "addModalLabel">Add Shares for {{ticker}}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form id="addShareForm" method="POST" action="/results">
+                      <!-- Modal body -->
+                      <div class = "modal-body">
+                        <!-- ADD # OF SHARES FOR TICKER -->
+                          <div id="addShares">
+                            <!-- number field for number of shares to be added -->
+                            <label for= "addShareField"  class="form-label">Number of Shares to Add to {{ticker}}</label>                            
+                            <input type="number" class="form-control" id="addShareField" name="addVal">                              
+                            <label for="tickerName" class="form-label">Ticker Name</label>
+                            <input type="text" class="form-control" id="tickerName" name="tickerName" value="{{ticker}}" readonly="readonly"> <!-- TODO: value = ticker needs to be changed-->
+                          </div>
+                      </div>
+                      <!-- Modal Footer -->
+                      <div class = "modal-footer">
+                        <!-- Cancel button -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <!-- submit button -->
+                        <button id="submitButton" type="button submit" class="btn btn-primary">Save Changes</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
+              </div>
+
+
+              <!-- Modal pop up to remove shares -->
+              <div class = "modal fade" id = "delModal" tabindex="-1" role="dialog" aria-labelledby="Remove Modal Label" aria-hidden = "true">
+                <div class="modal-dialog modal-dialog-centered" style = "margin-left: auto; margin-right: auto;">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class ="modal-title fs-5" id = "delModalLabel">Remove Shares for {{ticker}}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="removeShareForm" method="POST" action="/results">
+                      <!-- Modal body -->
+                      <div class = "modal-body">
+                        <!-- REMOVE # OF SHARES FOR TICKER -->
+                          <div id="removeShares">
+                            <!-- range field for number of shares to be removed -->
+                            <label for="delSharesRange"  class="form-label">Number of Shares to Remove for {{ticker}}</label>
+                            <input type="range" class="form-range" id="delSharesRange" name="removeVal" value="{{stocks[ticker].shares // 2}}" min="1" max="{{stocks[ticker].shares}}"  oninput="this.nextElementSibling.value = this.value">
+                            <output>{{ stocks[ticker].shares // 2 }}</output><br><br>
+                            <label for="tickerName" class="form-label">Ticker Name</label>
+                            <input type="text" class="form-control" id="tickerName" name="tickerName" value="{{ticker}}" readonly="readonly">
+                          </div>
+                      </div>
+                      <!-- Modal Footer -->
+                      <div class = "modal-footer">
+                        <!-- Cancel button -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <!-- submit button -->
+                        <button id="submitButton" type="button submit" class="btn btn-primary">Save Changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
 
                 
 
             </ul>
           </div>
       {% endfor %}
+      
       </ul>
+
 
 
 
@@ -151,5 +200,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </body>
 </html>
