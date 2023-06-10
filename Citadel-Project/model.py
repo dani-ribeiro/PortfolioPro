@@ -1,6 +1,6 @@
 import requests
 
-apikey = 'D9ytM36GzrbaRllf8C8dN7BCgidRY3RfkBnjNJ2w'
+apikey = '<INSERT_NEW_API_KEY>'
 
 def getStocks(ticker):
     if ticker == "NONE" or ticker == "None" or ticker == "":
