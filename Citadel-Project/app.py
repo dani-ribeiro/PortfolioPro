@@ -5,13 +5,13 @@ import requests
 from pymongo import MongoClient
 import os
 import openai
-openai.api_key = "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"
+openai.api_key = "<INSERT_NEW_OPENAI_KEY>"
 
 app = Flask(__name__)
 
 # MONGO DB CONFIGURATION TODO: USERNAME/PASSWORD GENERATION
 username = "admin"
-password = "y4YAl4HYf62iXkeT"
+password = "<INSERT_NEW_MONGODB_PASSWORD>"
 url = f"mongodb+srv://{username}:{password}@cluster0.3oovgyc.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(url)
 
